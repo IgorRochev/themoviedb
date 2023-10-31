@@ -3,15 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Login to your account',
-          style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
+        foregroundColor: Colors.white,
       ),
       body: Login(),
     );
@@ -26,10 +28,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return ListView(
       children: [
-        Authorisation(),
+        const Authorisation(),
         Registration(),
         VerifyEmail(),
       ],
@@ -38,11 +39,12 @@ class _LoginState extends State<Login> {
 }
 
 class VerifyEmail extends StatelessWidget {
+  const VerifyEmail({super.key});
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+    return const Padding(
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -67,11 +69,12 @@ class VerifyEmail extends StatelessWidget {
 }
 
 class Registration extends StatelessWidget {
+  const Registration({super.key});
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+    return const Padding(
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -95,73 +98,96 @@ class Registration extends StatelessWidget {
 }
 
 class Authorisation extends StatefulWidget {
+  const Authorisation({super.key});
+
   @override
   State<Authorisation> createState() => _AuthorisationState();
 }
 
 class _AuthorisationState extends State<Authorisation> {
+  final textFieldDecorator = const InputDecoration(
+    border: OutlineInputBorder(
+        borderSide: BorderSide(
+      color: Color.fromARGB(255, 224, 231, 237),
+    )),
+    isCollapsed: true,
+    contentPadding: EdgeInsets.all(10),
+    focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+      color: Color.fromARGB(255, 87, 176, 229),
+    )),
+  );
+
+  final loginConroller = TextEditingController();
+  final passwordConroller = TextEditingController();
+  String? errorText = null;
+
+  void _auth() {
+    final login = loginConroller.text;
+    final password = passwordConroller.text;
+
+    if (login == "admin" && password == "admin") {
+      errorText = null;
+    } else {
+      errorText = "Не верный логин или пароль";
+    }
+    setState(() {});
+  }
+
+  void _reset() {}
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    final errorText = this.errorText;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 20,
-          ),
-          Text('Username', style: TextStyle(fontWeight: FontWeight.w500)),
-          SizedBox(
+          if (errorText != null) ...[
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              errorText,
+              style: TextStyle(color: Colors.red),
+            ),
+            const SizedBox(
+              height: 10,
+            )
+          ] else
+            const SizedBox(
+              height: 20,
+            ),
+          const Text('Username', style: TextStyle(fontWeight: FontWeight.w500)),
+          const SizedBox(
             height: 5,
           ),
           TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                color: Color.fromARGB(255, 224, 231, 237),
-              )),
-              isCollapsed: true,
-              contentPadding: EdgeInsets.all(10),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                color: Color.fromARGB(255, 87, 176, 229),
-              )),
-            ),
+            controller: loginConroller,
+            decoration: textFieldDecorator,
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          Text('Password', style: TextStyle(fontWeight: FontWeight.w500)),
-          SizedBox(
+          const Text('Password', style: TextStyle(fontWeight: FontWeight.w500)),
+          const SizedBox(
             height: 5,
           ),
           TextField(
+            controller: passwordConroller,
             obscureText: true,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                  color: Color.fromARGB(255, 224, 231, 237),
-                )),
-                isCollapsed: true,
-                contentPadding: EdgeInsets.all(10),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                  color: Color.fromARGB(255, 87, 176, 229),
-                ))),
+            decoration: textFieldDecorator,
             inputFormatters: [
               FilteringTextInputFormatter.deny(RegExp('[{!@#}]'))
             ],
           ),
-          SizedBox(height: 25),
+          const SizedBox(height: 25),
           Row(
             children: [
               ElevatedButton(
                 onPressed: _auth,
-                child: Text(
-                  "Login",
-                  style: TextStyle(color: Colors.white),
-                ),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                       Color.fromARGB(255, 87, 176, 229)),
@@ -169,28 +195,28 @@ class _AuthorisationState extends State<Authorisation> {
                     borderRadius: BorderRadius.circular(5),
                   )),
                 ),
+                child: const Text(
+                  "Login",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               TextButton(
                 onPressed: _reset,
-                child: Text(
+                child: const Text(
                   "Reset password",
                   style: TextStyle(color: Color.fromARGB(255, 87, 176, 229)),
                 ),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
         ],
       ),
     );
   }
-
-  void _auth() {}
-
-  void _reset() {}
 }

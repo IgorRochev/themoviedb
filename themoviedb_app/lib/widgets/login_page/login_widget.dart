@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:themoviedb_app/widgets/main_screen/main_screen_widget.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -128,6 +129,8 @@ class _AuthorisationState extends State<Authorisation> {
 
     if (login == "admin" && password == "admin") {
       errorText = null;
+      final navigator = Navigator.of(context);
+      navigator.pushReplacementNamed("/main_screen");
     } else {
       errorText = "Не верный логин или пароль";
     }

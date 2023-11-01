@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:themoviedb_app/widgets/main_screen/main_screen_widget.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

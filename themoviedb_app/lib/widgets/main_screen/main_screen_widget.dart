@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:themoviedb_app/widgets/movie_list/movie_list_widget.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({super.key});
@@ -11,13 +12,11 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Index 0: Новости',
+      'Новости',
     ),
+    MovieListWidget(),
     Text(
-      'Index 1: Фильмы',
-    ),
-    Text(
-      'Index 2: Сериалы',
+      'Сериалы',
     ),
   ];
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:themoviedb_app/widgets/movie_details/movie_details_widget.dart';
 import 'package:themoviedb_app/widgets/movie_list/movie_list_widget.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -10,15 +11,6 @@ class MainScreenWidget extends StatefulWidget {
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Новости',
-    ),
-    MovieListWidget(),
-    Text(
-      'Сериалы',
-    ),
-  ];
 
   void _onItemTapped(int index) {
     if (_selectedIndex == index) return;
@@ -34,7 +26,16 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         title: Text("IMDB"),
       ),
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: IndexedStack(
+          index: _selectedIndex,
+          children: [
+            Text(
+              'Новости',
+            ),
+            MovieListWidget(),
+            MovieDetailsWidget(),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Color.fromRGBO(3, 37, 65, 1),

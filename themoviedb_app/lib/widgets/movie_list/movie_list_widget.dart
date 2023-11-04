@@ -10,6 +10,16 @@ class MovieListWidget extends StatefulWidget {
 }
 
 class _MovieListWidgetState extends State<MovieListWidget> {
+  final textController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    filtred_movie_row_data = movie_row_data;
+    textController.addListener(_search);
+  }
+
   final movie_row_data = [
     movie_data(
         imageName: Images.chainsaw10,
@@ -49,15 +59,30 @@ class _MovieListWidgetState extends State<MovieListWidget> {
             "Неудержимые несут потери: Барни Росс выбывает из строя, а Ли Кристмас отстранен от будущих операций. В команду набирают новых бойцов и отправляют возмещать ущерб. Но и они терпят поражение и попадают в плен. Теперь Ли Кристмас должен в одиночку пробраться в логово противника и освободить команду, попутно предотвратив глобальную катастрофу. Только так можно спасти мир и восстановить репутацию Неудержимых.")
   ];
 
+  var filtred_movie_row_data = <movie_data>[];
+
+  void _search() {
+    final text = textController.text;
+    if (text.isNotEmpty) {
+      filtred_movie_row_data = movie_row_data
+          .where((movie_data movie) =>
+              movie.movieName.toLowerCase().contains(text.toLowerCase()))
+          .toList();
+    } else {
+      filtred_movie_row_data = movie_row_data;
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
       ListView.builder(
-          itemCount: movie_row_data.length,
+          itemCount: filtred_movie_row_data.length,
           itemExtent: 163,
           padding: EdgeInsets.only(top: 70),
           itemBuilder: (BuildContext context, int index) {
-            final movie = movie_row_data[index];
+            final movie = filtred_movie_row_data[index];
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Stack(
@@ -125,9 +150,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      onTap: () {
-                        print("123");
-                      },
+                      onTap: _onTap,
                     ),
                   ),
                 ],
@@ -137,6 +160,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       Padding(
         padding: const EdgeInsets.all(10.0),
         child: TextField(
+          controller: textController,
           decoration: InputDecoration(
               labelText: "Поиск",
               filled: true,
@@ -145,5 +169,10 @@ class _MovieListWidgetState extends State<MovieListWidget> {
         ),
       ),
     ]);
+  }
+
+  void _onTap() {
+    final navigator = Navigator.of(context);
+    navigator.pushNamed("/film");
   }
 }

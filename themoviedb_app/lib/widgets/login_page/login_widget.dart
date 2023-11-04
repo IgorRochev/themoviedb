@@ -12,7 +12,6 @@ class LoginPage extends StatelessWidget {
         title: const Text(
           'Login to your account',
         ),
-        centerTitle: true,
         foregroundColor: Colors.white,
       ),
       body: Login(),

@@ -33,3 +33,6 @@ groups:
   - path: images
     class_name: Images
     types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp ]
+  - path: images/backdrops
+    class_name: Backdrops
+    types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp ]

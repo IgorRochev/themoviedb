@@ -9,4 +9,5 @@ class Images {
   static const String granturismo = 'images/granturismo.jpg';
   static const String retribution = 'images/retribution.jpg';
   static const String unstoppable4 = 'images/unstoppable4.jpg';
+  static const String placeholder = 'images/placeholder.jpg';
 }

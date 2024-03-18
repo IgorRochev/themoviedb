@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:themoviedb_app/widgets/movie_details/movie_details_widget.dart';
+// import 'package:themoviedb_app/widgets/movie_details/movie_details_widget.dart';
 import 'package:themoviedb_app/widgets/movie_list/movie_list_widget.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -33,7 +33,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               'Новости',
             ),
             MovieListWidget(),
-            MovieDetailsWidget(),
+            Text("Сериалы"),
           ],
         ),
       ),

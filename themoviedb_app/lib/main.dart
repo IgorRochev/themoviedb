@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:themoviedb_app/services/movie_service.dart';
 import 'package:themoviedb_app/widgets/login_page/login_widget.dart';
 import 'package:themoviedb_app/widgets/main_screen/main_screen_widget.dart';
 import 'package:themoviedb_app/widgets/movie_details/movie_details_widget.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void serviceLocator() {
+  GetIt.instance.registerSingleton(MovieService());
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  serviceLocator();
   runApp(const MyApp());
 }
 
@@ -23,6 +36,7 @@ class MyApp extends StatelessWidget {
         '/main_screen': (context) => const MainScreenWidget(),
         '/film': (context) => const MovieDetailsWidget(),
       },
+      // home: const AuthGate(),
       initialRoute: '/login',
     );
   }

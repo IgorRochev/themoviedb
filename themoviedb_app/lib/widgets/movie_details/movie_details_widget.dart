@@ -10,11 +10,11 @@ class MovieDetailsWidget extends StatelessWidget {
         appBar: AppBar(
           title: Text("Пила 10"),
         ),
-        body: ListView(
-          children: [
-            Container(
-              color: Colors.black,
-              child: Column(
+        body: ColoredBox(
+          color: Color.fromRGBO(24, 23, 27, 1.0),
+          child: ListView(
+            children: [
+              Column(
                 children: [
                   MovieImages(),
                   MovieNameWidget(),
@@ -24,9 +24,9 @@ class MovieDetailsWidget extends StatelessWidget {
                   OverviewText(),
                   MovieWorkers(),
                 ],
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ));
   }
 }
@@ -35,61 +35,71 @@ class MovieWorkers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Row(
-      children: [
-        Column(
-          children: [
-            Row(
-              children: [
-                Column(
-                  children: [
-                    Text("Steffano Sollima",
-                        style: TextStyle(color: Colors.white)),
-                    Text("Director", style: TextStyle(color: Colors.white)),
-                  ],
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Column(
-                  children: [
-                    Text("Taylor", style: TextStyle(color: Colors.white)),
-                    Text("Sound producer",
-                        style: TextStyle(color: Colors.white)),
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
-        Column(
-          children: [
-            Row(
-              children: [
-                Column(
-                  children: [
-                    Text("Taylor", style: TextStyle(color: Colors.white)),
-                    Text("Sound producer",
-                        style: TextStyle(color: Colors.white)),
-                  ],
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Column(
-                  children: [
-                    Text("Taylor", style: TextStyle(color: Colors.white)),
-                    Text("Sound producer",
-                        style: TextStyle(color: Colors.white)),
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Column(
+            children: [
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Text("Steffano Sollima",
+                          style: TextStyle(color: Colors.white)),
+                      Text("Director", style: TextStyle(color: Colors.white)),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Text("Taylor", style: TextStyle(color: Colors.white)),
+                      Text("Sound producer",
+                          style: TextStyle(color: Colors.white)),
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+          Column(
+            children: [
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Text("Taylor", style: TextStyle(color: Colors.white)),
+                      Text("Sound producer",
+                          style: TextStyle(color: Colors.white)),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Text("Taylor", style: TextStyle(color: Colors.white)),
+                      Text("Sound producer",
+                          style: TextStyle(color: Colors.white)),
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -215,18 +225,19 @@ class MovieNameWidget extends StatelessWidget {
             child: Text(
               "Заложники",
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
+                  color: Colors.white,
+                  fontSize: 20.85,
+                  fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(
-            width: 5,
-          ),
           Text(
-            "(2023)",
-            style: TextStyle(color: Colors.grey, fontSize: 20),
+            " (2023)",
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
           )
         ],
       ),

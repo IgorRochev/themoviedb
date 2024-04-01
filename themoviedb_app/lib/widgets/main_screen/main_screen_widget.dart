@@ -23,6 +23,15 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, "/profile");
+            },
+            icon: const Icon(Icons.account_circle_outlined),
+            color: Colors.white,
+          )
+        ],
         title: Text("IMDB"),
       ),
       body: Center(
